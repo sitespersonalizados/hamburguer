@@ -60,25 +60,23 @@ nav {
   color: #007BFF;
 }
 
-/* Carrinho lateral */
+/* Carrinho lateral - fixo e sempre visível */
 .carrinho-lateral {
   position: fixed;
-  top: 0;
-  right: -350px;
+  top: 60px; /* ajusta para ficar abaixo do header */
+  right: 0;
   width: 320px;
-  height: 100vh;
+  height: calc(100vh - 60px);
   background: #fff;
   box-shadow: -3px 0 5px rgba(0,0,0,0.2);
   padding: 20px;
   box-sizing: border-box;
-  transition: right 0.3s ease;
   overflow-y: auto;
   z-index: 1000;
+  /* remove transições e right negativo */
 }
 
-.carrinho-lateral.aberto {
-  right: 0;
-}
+/* Remove a classe aberto, pois o carrinho está sempre aberto */
 
 #carrinho-itens div {
   border-bottom: 1px solid #ddd;
