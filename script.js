@@ -2,7 +2,7 @@ let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
 function adicionarAoCarrinho(nome, preco) {
   const itemExistente = carrinho.find(item => item.nome === nome);
-  
+
   if (itemExistente) {
     itemExistente.quantidade += 1;
   } else {
@@ -88,8 +88,7 @@ function finalizarWhatsApp() {
 
   mensagem += `\n*Total: R$ ${total.toFixed(2)}*`;
 
-  // Substitua pelo número do WhatsApp do seu negócio (com DDI)
-  const numero = "5599999999999";
+  const numero = "5599999999999"; // <-- coloque seu número de WhatsApp aqui
   const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
 
   window.open(url, '_blank');
@@ -99,24 +98,28 @@ function finalizarWhatsApp() {
   fecharCarrinho();
 }
 
-// Menu hamburguer - mostrar/esconder menu
+// Menu hamburguer - ajustado para seleção correta do ul dentro do nav
 const menuHamburguer = document.getElementById('menu-hamburguer');
-const menuNavegacao = document.getElementById('menu-navegacao');
+const menuNavegacao = document.querySelector('nav ul'); // Ajustado para pegar o ul dentro do nav
 
-menuHamburguer.addEventListener('click', () => {
+menuHamburguer.addEventListener('click', (e) => {
+  e.stopPropagation(); // evita conflito com clique fora
   menuNavegacao.classList.toggle('mostrar');
 });
 
-// Fecha o menu quando clicar em um link do menu
+// Fecha o menu ao clicar em links
 menuNavegacao.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => {
     menuNavegacao.classList.remove('mostrar');
   });
 });
 
-// Fecha o menu ao clicar fora do menu e do ícone hamburguer
+// Fecha o menu ao clicar fora
 document.addEventListener('click', (e) => {
   if (!menuNavegacao.contains(e.target) && !menuHamburguer.contains(e.target)) {
     menuNavegacao.classList.remove('mostrar');
   }
 });
+
+// Atualiza o carrinho na carga inicial da página (caso tenha itens no localStorage)
+atualizarCarrinhoLateral();
