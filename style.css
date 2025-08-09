@@ -1,4 +1,4 @@
-/* Reset básico */
+/* ===== Reset Básico ===== */
 * {
   margin: 0;
   padding: 0;
@@ -6,174 +6,321 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background: #fff;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #ffffff;
   color: #333;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
+/* ===== Cabeçalho ===== */
 header {
-  background: #f4f4f4;
-  padding: 10px 20px;
+  background: #ffffff;
+  border-bottom: 3px solid #d4af37;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+  padding: 15px 5%;
   flex-wrap: wrap;
-  border-bottom: 1px solid #ddd;
 }
 
-.logo {
+header .logo {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
 .logo img {
-  height: 50px;
+  max-height: 100px;
+  width: auto;
 }
 
-nav {
-  position: relative;
+header h1 {
+  font-size: 1.5rem;
+  color: #d4af37;
 }
 
-.menu-hamburguer {
-  font-size: 30px;
-  cursor: pointer;
-  display: none; /* inicialmente escondido */
-  user-select: none;
-}
-
-.menu-navegacao {
+/* ===== Menu ===== */
+nav ul {
   list-style: none;
   display: flex;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
-.menu-navegacao li a {
+/* Esconder menu hamburger por padrão */
+.menu-hamburguer {
+  display: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Links do menu */
+nav a {
   text-decoration: none;
   color: #333;
-  font-weight: bold;
+  font-weight: 500;
+  transition: 0.3s;
 }
 
-.menu-navegacao li a.ativo,
-.menu-navegacao li a:hover {
-  color: #007BFF;
+nav a:hover,
+nav a.ativo {
+  color: #d4af37;
 }
 
-/* Carrinho lateral - fixo e sempre visível */
-.carrinho-lateral {
-  position: fixed;
-  top: 60px; /* ajusta para ficar abaixo do header */
-  right: 0;
-  width: 320px;
-  height: calc(100vh - 60px);
-  background: #fff;
-  box-shadow: -3px 0 5px rgba(0,0,0,0.2);
-  padding: 20px;
-  box-sizing: border-box;
-  overflow-y: auto;
-  z-index: 1000;
-  /* remove transições e right negativo */
+/* ===== Conteúdo Principal ===== */
+main {
+  padding: 20px 5%;
 }
 
-/* Remove a classe aberto, pois o carrinho está sempre aberto */
-
-#carrinho-itens div {
-  border-bottom: 1px solid #ddd;
-  margin-bottom: 10px;
-  padding-bottom: 10px;
+h2 {
+  color: #d4af37;
+  margin-bottom: 20px;
 }
 
+/* ===== Lista de Produtos ===== */
 .produtos {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-  padding: 20px;
+  grid-template-columns: repeat(5, 1fr); /* 5 colunas iguais */
+  gap: 25px;
+  margin: 30px auto;
+  max-width: 1200px; /* mais largo para acomodar 5 colunas */
+  justify-content: center;
 }
 
+/* ===== Card de Produto ===== */
 .produto {
-  border: 1px solid #ddd;
-  padding: 15px;
-  border-radius: 6px;
+  background-color: #fff;
+  border: 1.5px solid #e0c76d;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  padding: 20px 15px 50px; /* espaço maior abaixo para botão absoluto */
+  height: 320px;
   text-align: center;
-  background: #fafafa;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative; /* para posicionar o botão absoluto */
 }
 
-.produto-img {
-  max-width: 100%;
-  height: 150px;
+.produto:hover {
+  box-shadow: 0 8px 14px rgba(0,0,0,0.1);
+  transform: translateY(-6px);
+}
+
+.produto img {
+  width: 100%;
+  height: 160px;
   object-fit: contain;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.produto h3 {
+  color: #c5a944;
+  font-weight: 700;
   margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.produto p {
+  font-size: 0.875rem;
+  color: #333;
+  margin-bottom: 12px;
+  line-height: 1.3;
+  flex-grow: 1;
+}
+
+.produto span {
+  font-weight: 700;
+  color: #c5a944;
+  margin-bottom: 10px;
+  display: block;
 }
 
 .produto button {
-  background-color: #007BFF;
-  border: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-radius: 0 0 16px 16px;
+  padding: 12px 0;
+  font-weight: 700;
+  background-color: #e0c76d;
   color: white;
-  padding: 10px;
   cursor: pointer;
-  font-weight: bold;
-  border-radius: 4px;
-  margin-top: 10px;
   transition: background-color 0.3s ease;
+  border: none;
 }
 
 .produto button:hover {
-  background-color: #0056b3;
+  background-color: #c5a944;
 }
 
-/* Estilo botão remover no carrinho */
+/* ===== Carrinho Lateral ===== */
+.carrinho-lateral {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 300px;
+  height: 100%;
+  background-color: #fff;
+  border-left: 2px solid #e0c76d;
+  box-shadow: -4px 0 8px rgba(0,0,0,0.1);
+  padding: 20px;
+  transition: right 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+.carrinho-lateral h3 {
+  margin-top: 0;
+  color: #e0c76d;
+  font-size: 1.4em;
+}
+
+.carrinho-lateral p {
+  color: #333;
+}
+
 .carrinho-lateral button {
-  margin-top: 10px;
-  padding: 10px;
-  width: 100%;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.carrinho-lateral button:last-child {
-  background-color: #ccc;
-  margin-top: 5px;
-}
-
-/* Botão remover "X" */
-.carrinho-lateral #carrinho-itens button {
-  background: transparent;
+  background-color: #e0c76d;
+  color: white;
   border: none;
-  color: red;
+  padding: 10px;
+  margin-top: 10px;
+  width: 100%;
   cursor: pointer;
+  border-radius: 5px;
   font-weight: bold;
-  font-size: 16px;
 }
 
-/* Responsividade - menu hamburguer */
+.carrinho-lateral button:hover {
+  background-color: #c8ad53;
+}
+
+.carrinho-lateral.aberto {
+  right: 0;
+}
+
+/* ===== Rodapé ===== */
+footer {
+  text-align: center;
+  padding: 15px;
+  background: #f8f8f8;
+  border-top: 3px solid #e0c76d;
+  color: #333;
+}
+
+/* ===== Tablet (até 1024px) ===== */
+@media (max-width: 1024px) {
+  nav ul {
+    gap: 15px;
+    font-size: 0.95rem;
+  }
+
+  header .logo img {
+    max-height: 70px;
+  }
+}
+
+/* ===== Celular (até 768px) ===== */
 @media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    text-align: center;
+    padding: 10px;
+  }
+
+  header .logo {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  /* Mostrar menu hamburger */
   .menu-hamburguer {
     display: block;
   }
-  
-  .menu-navegacao {
+
+  /* Esconder menu principal */
+  nav ul {
     display: none;
     flex-direction: column;
-    background: #f4f4f4;
+    gap: 10px;
+    background: #fff;
     position: absolute;
-    top: 40px;
-    right: 0;
-    width: 200px;
-    border: 1px solid #ddd;
-    padding: 10px 0;
+    top: 65px;
+    right: 5%;
+    width: 150px;
+    padding: 10px;
+    border: 1px solid #d4af37;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 1000;
   }
 
-  .menu-navegacao.mostrar {
+  /* Mostrar menu principal quando classe 'mostrar' é adicionada */
+  nav ul.mostrar {
     display: flex;
   }
 
-  .menu-navegacao li {
-    margin: 10px 0;
-    text-align: right;
-    padding: 0 20px;
+  nav a {
+    font-size: 1rem;
+  }
+
+  h1, h2 {
+    font-size: 1.4rem;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  nav ul li:last-child {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #e0c76d;
+    padding: 12px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 1100;
+  }
+
+  nav ul li:last-child a {
+    font-size: 1.5rem;
+    color: white;
+  }
+}
+
+/* ===== Celular pequeno (até 480px) ===== */
+@media (max-width: 480px) {
+  .produto {
+    height: auto;
+    padding: 10px;
+  }
+
+  .produto img {
+    height: 120px;
+  }
+
+  .produto p {
+    font-size: 0.75em;
+  }
+
+  .produto span {
+    font-size: 0.85em;
+  }
+
+  h1, h2 {
+    font-size: 1.2rem;
+  }
+
+  nav ul {
+    font-size: 0.9rem;
+  }
+
+  .logo img {
+    max-height: 60px;
   }
 }
