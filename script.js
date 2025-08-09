@@ -106,3 +106,17 @@ const menuNavegacao = document.getElementById('menu-navegacao');
 menuHamburguer.addEventListener('click', () => {
   menuNavegacao.classList.toggle('mostrar');
 });
+
+// Fecha o menu quando clicar em um link do menu
+menuNavegacao.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    menuNavegacao.classList.remove('mostrar');
+  });
+});
+
+// Fecha o menu ao clicar fora do menu e do ícone hamburguer
+document.addEventListener('click', (e) => {
+  if (!menuNavegacao.contains(e.target) && !menuHamburguer.contains(e.target)) {
+    menuNavegacao.classList.remove('mostrar');
+  }
+});
